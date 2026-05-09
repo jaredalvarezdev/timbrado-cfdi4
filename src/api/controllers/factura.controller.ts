@@ -1,3 +1,4 @@
+import { validarFacturaIngreso } from '../../domain/timbrado/validarFacturaIngreso';
 import { Request, Response } from 'express';
 import { FacturaIngreso } from '../../domain/timbrado/factura-ingreso.model';
 
@@ -8,6 +9,16 @@ export const crearFacturaIngreso = (
 
   const factura = req.body as FacturaIngreso;
 
+  const errores = validarFacturaIngreso(factura);
+
+  if (errores.length > 0) {
+    res.status(400).json({
+      mensaje: 'Errores de validación',
+      errores: errores
+    });
+    return;
+  }
+  
   console.log(factura);
 
   res.status(200).json({
