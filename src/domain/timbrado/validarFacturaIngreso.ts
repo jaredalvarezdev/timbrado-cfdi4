@@ -107,17 +107,6 @@ export function validarFacturaIngreso(factura: FacturaIngreso): string[] {
         }
 
         if (
-          concepto.impuesto.tasaOCuota === undefined ||
-          concepto.impuesto.tasaOCuota === null
-        ) {
-          errores.push(
-            'La tasa o cuota es obligatoria en el concepto ' +
-              (i + 1) +
-              '.'
-          );
-        }
-
-        if (
           concepto.impuesto.importe === undefined ||
           concepto.impuesto.importe === null
         ) {
