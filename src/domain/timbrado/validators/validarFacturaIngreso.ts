@@ -1,4 +1,4 @@
-import { FacturaIngreso } from './factura-ingreso.model';
+import { FacturaIngreso } from '../factura-ingreso.model';
 
 export function validarFacturaIngreso(factura: FacturaIngreso): string[] {
   const errores: string[] = [];
