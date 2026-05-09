@@ -1,4 +1,4 @@
-import { validarFacturaIngreso } from '../../domain/timbrado/validarFacturaIngreso';
+import { validarFacturaIngreso } from '../../domain/timbrado/validators/validarFacturaIngreso';
 import { Request, Response } from 'express';
 import { FacturaIngreso } from '../../domain/timbrado/factura-ingreso.model';
 
