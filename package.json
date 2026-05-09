@@ -1,0 +1,9 @@
+{
+  "name": "mvp-timbrado-xml",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MVP backend Node.js para recepcion de XML CFDI y timbrado simulado.",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
+}
