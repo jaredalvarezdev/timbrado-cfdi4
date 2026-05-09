@@ -5,7 +5,6 @@ export interface Concepto {
   cantidad: number;
   claveUnidad: string;
   descripcion: string;
-  valorUnitario: number;
   importe: number;
   impuesto: Impuesto;
 }
