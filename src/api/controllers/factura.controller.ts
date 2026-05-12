@@ -1,6 +1,7 @@
-import { validarFacturaIngreso } from '../../domain/validators/factura/validarFacturaIngreso';
 import { Request, Response } from 'express';
+import { validarFacturaIngreso } from '../../domain/validators/factura/validarFacturaIngreso';
 import { FacturaIngreso } from '../../domain/timbrado/factura-ingreso.model';
+import { generarXmlIngreso } from '../../application/timbrado/generarXmlIngreso';
 
 export const crearFacturaIngreso = (
   req: Request,
@@ -8,22 +9,22 @@ export const crearFacturaIngreso = (
 ) => {
 
   const factura = req.body as FacturaIngreso;
-
   const errores = validarFacturaIngreso(factura);
 
   if (errores.length > 0) {
+
     res.status(400).json({
-      mensaje: 'Errores de validación',
+      mensaje: 'Error de validación en la factura',
       errores: errores
     });
+
     return;
   }
-  
-  console.log(factura);
+
+  const xml = generarXmlIngreso(factura);
 
   res.status(200).json({
-    mensaje: 'Factura recibida correctamente',
-    data: factura
+    mensaje: 'Factura generada correctamente',
+    xml: xml
   });
-
 };
