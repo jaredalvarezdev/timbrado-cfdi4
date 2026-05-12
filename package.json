@@ -4,7 +4,7 @@
   "private": true,
   "description": "MVP backend Node.js para recepcion de XML CFDI y timbrado simulado.",
   "scripts": {
-    "dev": "ts-node-dev --respawn src/app.ts"
+    "dev": "ts-node-dev --respawn src/index.ts"
   },
   "dependencies": {
     "express": "^5.2.1"
