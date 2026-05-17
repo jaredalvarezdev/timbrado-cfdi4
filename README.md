@@ -92,3 +92,18 @@ POST /api/facturas/ingreso
 - Limite maximo de tamaño XML.
 - Nivel de validacion XML minima.
 - Politica de logs para XML completo o solo metadata.
+
+## Validación XSD
+
+El XML generado se valida contra el archivo `src/domain/xml/xsd/factura-ingreso.xsd` antes de enviarse como respuesta.
+
+Inicialmente se utilizó la librería `xsd-schema-validator`, la cual ejecuta la validación mediante un proceso externo basado en Java. Durante las pruebas en Windows con `ts-node-dev`, este proceso quedaba bloqueado y las peticiones en Postman permanecían cargando indefinidamente.
+
+Para resolver este problema, se reemplazó la dependencia por `libxmljs2`, que permite:
+
+- Leer el archivo XSD localmente.
+- Parsear el XML generado.
+- Validar el XML contra el esquema.
+- Obtener los errores de validación cuando existan.
+
+Este cambio eliminó la dependencia del proceso externo y permitió una validación más estable y confiable dentro del entorno Node.js.
