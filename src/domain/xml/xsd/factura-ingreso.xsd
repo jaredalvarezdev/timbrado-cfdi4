@@ -1,0 +1,39 @@
+import validator from 'xsd-schema-validator';
+import path from 'path';
+
+export function validarXmlXsd(xml: string): Promise<void> {
+
+  // Ruta del esquema XSD
+  const rutaXsd = path.resolve(
+    __dirname,
+    'factura-ingreso.xsd'
+  );
+
+  return new Promise((resolve, reject) => {
+
+    // Validacion del XML
+    validator.validateXML(
+      xml,
+      rutaXsd,
+      (error, result) => {
+
+        // Error interno
+        if (error) {
+          reject(error.message);
+          return;
+        }
+
+        // XML invalido
+        if (!result.valid) {
+          reject('XML invalido contra esquema XSD');
+          return;
+        }
+
+        // XML valido
+        resolve();
+      }
+    );
+
+  });
+
+}
