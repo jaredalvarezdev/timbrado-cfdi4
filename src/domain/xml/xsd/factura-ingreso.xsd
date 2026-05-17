@@ -1,39 +1,144 @@
-import validator from 'xsd-schema-validator';
-import path from 'path';
+<?xml version="1.0" encoding="UTF-8"?>
 
-export function validarXmlXsd(xml: string): Promise<void> {
+<xs:schema
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:cfdi="http://www.sat.gob.mx/cfd/4"
+  targetNamespace="http://www.sat.gob.mx/cfd/4"
+  elementFormDefault="qualified"
+>
 
-  // Ruta del esquema XSD
-  const rutaXsd = path.resolve(
-    __dirname,
-    'factura-ingreso.xsd'
-  );
+  <xs:element name="Comprobante">
 
-  return new Promise((resolve, reject) => {
+    <xs:complexType>
 
-    // Validacion del XML
-    validator.validateXML(
-      xml,
-      rutaXsd,
-      (error, result) => {
+      <xs:sequence>
 
-        // Error interno
-        if (error) {
-          reject(error.message);
-          return;
-        }
+        <xs:element name="Emisor">
+          <xs:complexType>
+            <xs:attribute name="Rfc" type="xs:string" use="required"/>
+            <xs:attribute name="Nombre" type="xs:string" use="required"/>
+            <xs:attribute name="RegimenFiscal" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
 
-        // XML invalido
-        if (!result.valid) {
-          reject('XML invalido contra esquema XSD');
-          return;
-        }
+        <xs:element name="Receptor">
+          <xs:complexType>
+            <xs:attribute name="Rfc" type="xs:string" use="required"/>
+            <xs:attribute name="Nombre" type="xs:string" use="required"/>
+            <xs:attribute name="UsoCFDI" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
 
-        // XML valido
-        resolve();
-      }
-    );
+        <xs:element name="Conceptos">
 
-  });
+          <xs:complexType>
 
-}
+            <xs:sequence>
+
+              <xs:element
+                name="Concepto"
+                maxOccurs="unbounded"
+              >
+
+                <xs:complexType>
+
+                  <xs:sequence>
+
+                    <xs:element name="Impuestos">
+
+                      <xs:complexType>
+
+                        <xs:sequence>
+
+                          <xs:element name="Traslados">
+
+                            <xs:complexType>
+
+                              <xs:sequence>
+
+                                <xs:element name="Traslado">
+
+                                  <xs:complexType>
+                                    <xs:attribute
+                                      name="Impuesto"
+                                      type="xs:string"
+                                      use="required"
+                                    />
+
+                                    <xs:attribute
+                                      name="Importe"
+                                      type="xs:decimal"
+                                      use="required"
+                                    />
+
+                                  </xs:complexType>
+
+                                </xs:element>
+
+                              </xs:sequence>
+
+                            </xs:complexType>
+
+                          </xs:element>
+
+                        </xs:sequence>
+
+                      </xs:complexType>
+
+                    </xs:element>
+
+                  </xs:sequence>
+
+                  <xs:attribute
+                    name="ClaveProdServ"
+                    type="xs:string"
+                    use="required"
+                  />
+
+                  <xs:attribute
+                    name="Cantidad"
+                    type="xs:decimal"
+                    use="required"
+                  />
+
+                  <xs:attribute
+                    name="ClaveUnidad"
+                    type="xs:string"
+                    use="required"
+                  />
+
+                  <xs:attribute
+                    name="Descripcion"
+                    type="xs:string"
+                    use="required"
+                  />
+
+                  <xs:attribute
+                    name="Importe"
+                    type="xs:decimal"
+                    use="required"
+                  />
+
+                </xs:complexType>
+
+              </xs:element>
+
+            </xs:sequence>
+
+          </xs:complexType>
+
+        </xs:element>
+
+      </xs:sequence>
+
+      <xs:attribute
+        name="Version"
+        type="xs:string"
+        use="required"
+      />
+
+    </xs:complexType>
+
+  </xs:element>
+
+</xs:schema>
