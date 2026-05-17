@@ -1,32 +1,67 @@
-import validator from "xsd-schema-validator";
+import fs from "fs";
+import path from "path";
+import libxmljs from "libxmljs2";
 
-// funcion para validar xml contra xsd
-export const validarXmlXsd = async (
-  xml: string,
-  rutaXsd: string
-) => {
+// función para validar un XML usando un archivo XSD
+export async function validarXmlXsd(
+  xml: string
+): Promise<any> {
 
-  return new Promise((resolve, reject) => {
-
-    // usamos "as any" para evitar problemas de typings
-    (validator.validateXML as any)(
-
-      xml,
-      rutaXsd,
-
-      (error: any, result: any) => {
-
-        if (error) {
-          reject(error);
-          return;
-        }
-
-        resolve(result);
-
-      }
-
+  try {
+    // obtenemos la ruta absoluta del archivo XSD
+    // __dirname representa la carpeta actual
+    const rutaXsd = path.resolve(
+      __dirname,
+      "factura-ingreso.xsd"
     );
 
-  });
+    // leemos el contenido del archivo XSD
+    // utf8 es importante para evitar errores de lectura
+    const contenidoXsd =
+      fs.readFileSync(rutaXsd, "utf8");
 
-};
+    // convertimos el XML string a documento XML
+    const xmlDoc =
+      libxmljs.parseXml(xml);
+
+    // convertimos el XSD string a documento XML
+    const xsdDoc =
+      libxmljs.parseXml(contenidoXsd);
+
+    // validamos el XML usando el XSD
+    const esValido =
+      xmlDoc.validate(xsdDoc);
+
+    // si el XML NO es válido
+    if (!esValido) {
+
+      // retornamos errores encontrados
+      return {
+        valido: false,
+
+        // validationErrors contiene detalles del error
+        errores: xmlDoc.validationErrors
+      };
+    }
+
+    // si todo salió bien
+    return {
+      valido: true
+    };
+
+  } catch (error: any) {
+
+    // error inesperado del servidor
+    // por ejemplo:
+    // - archivo XSD no encontrado
+    // - XML mal formado
+    // - problema interno
+
+    return {
+      valido: false,
+      error: error.message
+    };
+
+  }
+
+}
