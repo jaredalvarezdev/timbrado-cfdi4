@@ -11,7 +11,7 @@ Este endpoint:
 - Genera el XML de la factura.
 - Formatea RFCs automáticamente.
 - Limpia el XML antes de enviarlo.
-
+- Valida el XML generado contra un archivo XSD.
 ---
 
 ## Ejemplo correcto
