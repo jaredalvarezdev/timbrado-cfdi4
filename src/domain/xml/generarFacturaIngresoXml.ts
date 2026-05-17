@@ -1,10 +1,11 @@
-import { FacturaIngreso } from '../timbrado/factura-ingreso.model';
+import { FacturaIngreso } from "../timbrado/factura-ingreso.model";
 
 export function generarFacturaIngresoXml(
   factura: FacturaIngreso
 ): string {
 
-  let conceptosXml = '';
+  // construimos conceptos en XML
+  let conceptosXml = "";
 
   for (const concepto of factura.conceptos) {
 
@@ -16,6 +17,7 @@ export function generarFacturaIngresoXml(
         Descripcion="${concepto.descripcion}"
         Importe="${concepto.importe}"
       >
+
         <cfdi:Impuestos>
           <cfdi:Traslados>
             <cfdi:Traslado
@@ -24,32 +26,35 @@ export function generarFacturaIngresoXml(
             />
           </cfdi:Traslados>
         </cfdi:Impuestos>
+
       </cfdi:Concepto>
     `;
   }
 
+  // XML final
   return `
-    <cfdi:Comprobante
-      xmlns:cfdi="http://www.sat.gob.mx/cfd/4"
-      Version="4.0"
-    >
+<?xml version="1.0" encoding="UTF-8"?>
 
-      <cfdi:Emisor
-        Rfc="${factura.emisor.rfc}"
-        Nombre="${factura.emisor.nombre}"
-        RegimenFiscal="${factura.emisor.regimenFiscal}"
-      />
+<cfdi:Comprobante
+  xmlns:cfdi="http://www.sat.gob.mx/cfd/4"
+  Version="4.0">
 
-      <cfdi:Receptor
-        Rfc="${factura.receptor.rfc}"
-        Nombre="${factura.receptor.nombre}"
-        UsoCFDI="${factura.receptor.usoCfdi}"
-      />
+  <cfdi:Emisor
+    Rfc="${factura.emisor.rfc}"
+    Nombre="${factura.emisor.nombre}"
+    RegimenFiscal="${factura.emisor.regimenFiscal}"
+  />
 
-      <cfdi:Conceptos>
-        ${conceptosXml}
-      </cfdi:Conceptos>
+  <cfdi:Receptor
+    Rfc="${factura.receptor.rfc}"
+    Nombre="${factura.receptor.nombre}"
+    UsoCFDI="${factura.receptor.usoCfdi}"
+  />
 
-    </cfdi:Comprobante>
+  <cfdi:Conceptos>
+    ${conceptosXml}
+  </cfdi:Conceptos>
+
+</cfdi:Comprobante>
   `;
 }
