@@ -16,7 +16,6 @@ export async function validarXmlXsd(
     );
 
     // leemos el contenido del archivo XSD
-    // utf8 es importante para evitar errores de lectura
     const contenidoXsd =
       fs.readFileSync(rutaXsd, "utf8");
 
@@ -44,7 +43,7 @@ export async function validarXmlXsd(
       };
     }
 
-    // si todo salió bien
+    // si todo salio bien
     return {
       valido: true
     };
@@ -56,7 +55,6 @@ export async function validarXmlXsd(
     // - archivo XSD no encontrado
     // - XML mal formado
     // - problema interno
-
     return {
       valido: false,
       error: error.message
