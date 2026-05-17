@@ -32,6 +32,8 @@ export function generarFacturaIngresoXml(
   }
 
   // XML final
+  // Si se cambia el nombre de algún elemento o atributo requerido,
+  // el XSD marcará el XML como inválido aunque el JSON sea correcto.
   return `
 <?xml version="1.0" encoding="UTF-8"?>
 
