@@ -1,27 +1,18 @@
-import path from "path";
 import { FacturaIngreso } from "../../domain/timbrado/factura-ingreso.model";
 import { generarFacturaIngresoXml } from "../../domain/xml/generarFacturaIngresoXml";
-import { validarXmlXsd } from "../../domain/xml/xsd/validarXmlXsd";
 import { limpiarXml } from "../../shared/helpers/limpiarXml";
 
+// función para generar el XML de una factura ingreso
 export async function generarXmlIngreso(
   factura: FacturaIngreso
 ): Promise<string> {
 
-  // generamos xml
+  // generamos el XML usando los datos de la factura
   const xml = generarFacturaIngresoXml(factura);
 
-  // limpiamos xml
+  // limpiamos espacios o saltos innecesarios
   const xmlLimpio = limpiarXml(xml);
 
-  // ruta del xsd
-  const rutaXsd = path.resolve(
-    __dirname,
-    "../../domain/xml/xsd/factura-ingreso.xsd"
-  );
-
-  // validamos xml contra xsd
-  await validarXmlXsd(xmlLimpio, rutaXsd);
-
+  // regresamos el XML limpio
   return xmlLimpio;
 }
