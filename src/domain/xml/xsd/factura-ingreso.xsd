@@ -1,144 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xs:schema
-  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:cfdi="http://www.sat.gob.mx/cfd/4"
-  targetNamespace="http://www.sat.gob.mx/cfd/4"
-  elementFormDefault="qualified"
->
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:cfdi="http://www.sat.gob.mx/cfd/4"
+    targetNamespace="http://www.sat.gob.mx/cfd/4"
+    elementFormDefault="qualified">
 
-  <xs:element name="Comprobante">
+    <xs:element name="Comprobante">
 
-    <xs:complexType>
-
-      <xs:sequence>
-
-        <xs:element name="Emisor">
-          <xs:complexType>
-            <xs:attribute name="Rfc" type="xs:string" use="required"/>
-            <xs:attribute name="Nombre" type="xs:string" use="required"/>
-            <xs:attribute name="RegimenFiscal" type="xs:string" use="required"/>
-          </xs:complexType>
-        </xs:element>
-
-        <xs:element name="Receptor">
-          <xs:complexType>
-            <xs:attribute name="Rfc" type="xs:string" use="required"/>
-            <xs:attribute name="Nombre" type="xs:string" use="required"/>
-            <xs:attribute name="UsoCFDI" type="xs:string" use="required"/>
-          </xs:complexType>
-        </xs:element>
-
-        <xs:element name="Conceptos">
-
-          <xs:complexType>
+        <xs:complexType>
 
             <xs:sequence>
 
-              <xs:element
-                name="Concepto"
-                maxOccurs="unbounded"
-              >
+                <xs:element name="Emisor">
+                    <xs:complexType>
+                        <xs:attribute name="Rfc" type="xs:string" use="required"/>
+                        <xs:attribute name="Nombre" type="xs:string" use="required"/>
+                        <xs:attribute name="RegimenFiscal" type="xs:string" use="required"/>
+                    </xs:complexType>
+                </xs:element>
 
-                <xs:complexType>
+                <xs:element name="Receptor">
+                    <xs:complexType>
+                        <xs:attribute name="Rfc" type="xs:string" use="required"/>
+                        <xs:attribute name="Nombre" type="xs:string" use="required"/>
+                        <xs:attribute name="UsoCFDI" type="xs:string" use="required"/>
+                    </xs:complexType>
+                </xs:element>
 
-                  <xs:sequence>
+                <xs:element name="Conceptos">
 
-                    <xs:element name="Impuestos">
-
-                      <xs:complexType>
+                    <xs:complexType>
 
                         <xs:sequence>
 
-                          <xs:element name="Traslados">
+                            <xs:element
+                                name="Concepto"
+                                maxOccurs="unbounded">
 
-                            <xs:complexType>
+                                <xs:complexType>
 
-                              <xs:sequence>
+                                    <xs:sequence>
 
-                                <xs:element name="Traslado">
+                                        <xs:element name="Impuestos">
 
-                                  <xs:complexType>
+                                            <xs:complexType>
+
+                                                <xs:sequence>
+
+                                                    <xs:element name="Traslados">
+
+                                                        <xs:complexType>
+
+                                                            <xs:sequence>
+
+                                                                <xs:element name="Traslado">
+
+                                                                    <xs:complexType>
+                                                                        <xs:attribute
+                                                                            name="Impuesto"
+                                                                            type="xs:string"
+                                                                            use="required"/>
+
+                                                                        <xs:attribute
+                                                                            name="Importe"
+                                                                            type="xs:decimal"
+                                                                            use="required"/>
+                                                                    </xs:complexType>
+
+                                                                </xs:element>
+
+                                                            </xs:sequence>
+
+                                                        </xs:complexType>
+
+                                                    </xs:element>
+
+                                                </xs:sequence>
+
+                                            </xs:complexType>
+
+                                        </xs:element>
+
+                                    </xs:sequence>
+
                                     <xs:attribute
-                                      name="Impuesto"
-                                      type="xs:string"
-                                      use="required"
-                                    />
+                                        name="ClaveProdServ"
+                                        type="xs:string"
+                                        use="required"/>
 
                                     <xs:attribute
-                                      name="Importe"
-                                      type="xs:decimal"
-                                      use="required"
-                                    />
+                                        name="Cantidad"
+                                        type="xs:decimal"
+                                        use="required"/>
 
-                                  </xs:complexType>
+                                    <xs:attribute
+                                        name="ClaveUnidad"
+                                        type="xs:string"
+                                        use="required"/>
 
-                                </xs:element>
+                                    <xs:attribute
+                                        name="Descripcion"
+                                        type="xs:string"
+                                        use="required"/>
 
-                              </xs:sequence>
+                                    <xs:attribute
+                                        name="Importe"
+                                        type="xs:decimal"
+                                        use="required"/>
 
-                            </xs:complexType>
+                                </xs:complexType>
 
-                          </xs:element>
+                            </xs:element>
 
                         </xs:sequence>
 
-                      </xs:complexType>
+                    </xs:complexType>
 
-                    </xs:element>
-
-                  </xs:sequence>
-
-                  <xs:attribute
-                    name="ClaveProdServ"
-                    type="xs:string"
-                    use="required"
-                  />
-
-                  <xs:attribute
-                    name="Cantidad"
-                    type="xs:decimal"
-                    use="required"
-                  />
-
-                  <xs:attribute
-                    name="ClaveUnidad"
-                    type="xs:string"
-                    use="required"
-                  />
-
-                  <xs:attribute
-                    name="Descripcion"
-                    type="xs:string"
-                    use="required"
-                  />
-
-                  <xs:attribute
-                    name="Importe"
-                    type="xs:decimal"
-                    use="required"
-                  />
-
-                </xs:complexType>
-
-              </xs:element>
+                </xs:element>
 
             </xs:sequence>
 
-          </xs:complexType>
+            <xs:attribute
+                name="Version"
+                type="xs:string"
+                use="required"/>
 
-        </xs:element>
+        </xs:complexType>
 
-      </xs:sequence>
-
-      <xs:attribute
-        name="Version"
-        type="xs:string"
-        use="required"
-      />
-
-    </xs:complexType>
-
-  </xs:element>
+    </xs:element>
 
 </xs:schema>
