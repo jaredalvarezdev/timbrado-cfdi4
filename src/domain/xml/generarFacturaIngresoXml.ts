@@ -47,9 +47,11 @@ export function generarFacturaIngresoXml(
     RegimenFiscal="${factura.emisor.regimenFiscal}"
   />
 
-  <cfdi:Receptor
+   <cfdi:Receptor
     Rfc="${factura.receptor.rfc}"
     Nombre="${factura.receptor.nombre}"
+    DomicilioFiscalReceptor="${factura.receptor.codigoPostal}"
+    RegimenFiscalReceptor="${factura.receptor.regimenFiscal}"
     UsoCFDI="${factura.receptor.usoCfdi}"
   />
 
