@@ -24,6 +24,8 @@
                     <xs:complexType>
                         <xs:attribute name="Rfc" type="xs:string" use="required"/>
                         <xs:attribute name="Nombre" type="xs:string" use="required"/>
+                        <xs:attribute name="DomicilioFiscalReceptor" type="xs:string" use="required"/>
+                        <xs:attribute name="RegimenFiscalReceptor" type="xs:string" use="required"/>
                         <xs:attribute name="UsoCFDI" type="xs:string" use="required"/>
                     </xs:complexType>
                 </xs:element>
