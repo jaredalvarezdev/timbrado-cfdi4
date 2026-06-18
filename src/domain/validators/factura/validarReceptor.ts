@@ -20,6 +20,10 @@ export function validarReceptor(receptor: Receptor): string[] {
     errores.push('El código postal del receptor es obligatorio.');
   }
 
+  if (!receptor.regimenFiscal) {
+    errores.push('El régimen fiscal del receptor es obligatorio.');
+  }
+
   if (!receptor.usoCfdi) {
     errores.push('El uso del CFDI es obligatorio.');
   }
