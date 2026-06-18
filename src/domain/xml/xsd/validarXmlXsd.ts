@@ -4,15 +4,17 @@ import libxmljs from "libxmljs2";
 
 // función para validar un XML usando un archivo XSD
 export async function validarXmlXsd(
-  xml: string
+  xml: string,
+  nombreXsd: string
 ): Promise<any> {
 
   try {
+
     // obtenemos la ruta absoluta del archivo XSD
     // __dirname representa la carpeta actual
     const rutaXsd = path.resolve(
       __dirname,
-      "factura-ingreso.xsd"
+      nombreXsd
     );
 
     // leemos el contenido del archivo XSD
@@ -43,7 +45,7 @@ export async function validarXmlXsd(
       };
     }
 
-    // si todo salio bien
+    // si todo salió bien
     return {
       valido: true
     };
