@@ -23,10 +23,11 @@ Este endpoint:
     "codigoPostal": "37000",
     "regimenFiscal": "601"
   },
-  "receptor": {
+   "receptor": {
     "rfc": " xaxx010101000 ",
     "nombre": "Publico General",
     "codigoPostal": "37000",
+    "regimenFiscal": "616",
     "usoCfdi": "G03"
   },
   "conceptos": [
@@ -67,6 +68,7 @@ Este endpoint:
     "rfc": "",
     "nombre": "",
     "codigoPostal": "",
+    "regimenFiscal": "",
     "usoCfdi": ""
   },
   "conceptos": []
@@ -78,6 +80,7 @@ Este endpoint:
 - RFC obligatorio.
 - Nombre obligatorio.
 - Código postal obligatorio.
+- Régimen fiscal obligatorio.
 - Uso CFDI obligatorio.
 - Debe existir al menos un concepto.
 
@@ -87,6 +90,7 @@ Este endpoint:
   "mensaje": "Error de validación en la factura",
   "errores": [
     "El RFC del emisor es obligatorio.",
+    "El régimen fiscal del receptor es obligatorio.",
     "Debe existir al menos un concepto."
   ]
 }
