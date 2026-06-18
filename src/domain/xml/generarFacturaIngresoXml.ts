@@ -39,7 +39,9 @@ export function generarFacturaIngresoXml(
 
 <cfdi:Comprobante
   xmlns:cfdi="http://www.sat.gob.mx/cfd/4"
-  Version="4.0">
+  Version="4.0"
+  TipoDeComprobante="I">
+
 
   <cfdi:Emisor
     Rfc="${factura.emisor.rfc}"
