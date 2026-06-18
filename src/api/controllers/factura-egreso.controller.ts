@@ -34,7 +34,10 @@ export const crearFacturaEgreso = async (
     const xml = await generarXmlEgreso(factura);
 
     // Validar contra XSD
-    const resultadoXsd = await validarXmlXsd(xml);
+    const resultadoXsd = await validarXmlXsd(
+      xml,
+      "factura-egreso.xsd"
+    );
 
     if (!resultadoXsd.valido) {
       return res.status(400).json({
